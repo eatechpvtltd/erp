@@ -97,49 +97,184 @@ class StudentController extends CollegeBaseController
     {
         $data = [];
         if($request->all()) {
-            $data['student'] = Student::select('students.id', 'students.reg_no', 'students.reg_date',
-                'students.faculty', 'students.semester', 'students.batch', 'students.academic_status',
-                'students.first_name', 'students.middle_name', 'students.last_name', 'students.status',
-                'f.faculty','s.semester','ss.title as academic_status')
-                ->where(function ($query) use ($request) {
-                    $this->commonStudentFilterCondition($query, $request);
-                    //fast_finder
-                    if ($request->has('fast_finder') && $request->get('fast_finder') !=null) {
-                        $query->where('students.reg_no', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.university_reg', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.first_name', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.middle_name', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.last_name', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.gender', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.blood_group', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.nationality', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.national_id_1', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.national_id_2', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.national_id_3', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.national_id_4', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.religion', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.caste', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.mother_tongue', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('students.email', 'like', '%' . $request->fast_finder . '%')
-                                ->orWhere('ai.mobile_1', 'like' , '%'.$request->fast_finder.'%')
-                                ->orWhere('ai.mobile_2', 'like' , '%'.$request->fast_finder.'%');
+            // $data['student'] = Student::select('students.id', 'students.reg_no', 'students.reg_date',
+            //     'students.faculty', 'students.semester', 'students.batch', 'students.academic_status',
+            //     'students.first_name', 'students.middle_name', 'students.last_name', 'students.status',
+            //     'f.faculty','s.semester','ss.title as academic_status')
+            //     ->where(function ($query) use ($request) {
+            //         // $this->commonStudentFilterCondition($query, $request);
+            //         //fast_finder
+            //         if ($request->has('fast_finder') && $request->get('fast_finder') !=null) {
+            //             $query->where('students.reg_no', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.university_reg', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.first_name', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.middle_name', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.last_name', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.gender', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.blood_group', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.nationality', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.national_id_1', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.national_id_2', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.national_id_3', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.national_id_4', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.religion', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.caste', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.mother_tongue', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('students.email', 'like', '%' . $request->fast_finder . '%')
+            //                     ->orWhere('ai.mobile_1', 'like' , '%'.$request->fast_finder.'%')
+            //                     ->orWhere('ai.mobile_2', 'like' , '%'.$request->fast_finder.'%');
+            //         }
+            //     })
+            //     ->join('addressinfos as ai','ai.students_id','=','students.id')
+            //     ->join('faculties as f','f.id','=','students.faculty')
+            //     ->join('semesters as s','s.id','=','students.semester')
+            //     ->join('student_statuses as ss','ss.id','=','students.academic_status')
+            //     //->get();
+            //     ->paginate(env('PAGINATION_LIMIT',$this->pagination_limit));
+            // return Student::where('reg_no',$request->reg_no)->get();
+            // return $request;
+            // {
+            //     "reg_no": "JH00254",
+            //     "reg_start_date": "2025-02-26",
+            //     "reg_end_date": "2025-02-26",
+            //     "faculty": "9",
+            //     "semester_select": "14",
+            //     "batch": "2",
+            //     "status": "active",
+            //     "academic_status": "4",
+            //     "first_name": "Rajesh",
+            //     "middle_name": "Healthcare Business Vendor",
+            //     "last_name": "Pradhan",
+            //     "gender": "MALE",
+            //     "blood_group": "A",
+            //     "date_of_birth_start_date": "2025-03-04",
+            //     "date_of_birth_end_date": "2025-03-12",
+            //     "university_reg": "879879",
+            //     "religion": "6575",
+            //     "caste": "bxcbcx",
+            //     "nationality": "indian",
+            //     "national_id_1": "undefined",
+            //     "national_id_2": "undefined",
+            //     "national_id_3": "undefined",
+            //     "national_id_4": "undefined",
+            //     "mother_tongue": "hindi"
+            //     }
+            $data['student'] = Student::with('SemesterData','AcademicStatusData','facultyData')->where(function ($query) use ($request) {
+                if ($request != null) {
+                    // Registration number filter
+                    if (!empty($request->reg_no)) {
+                        $query->where('reg_no', 'like', '%' . $request->reg_no . '%');
                     }
-                })
-                ->join('addressinfos as ai','ai.students_id','=','students.id')
-                ->join('faculties as f','f.id','=','students.faculty')
-                ->join('semesters as s','s.id','=','students.semester')
-                ->join('student_statuses as ss','ss.id','=','students.academic_status')
-                //->get();
-                ->paginate(env('PAGINATION_LIMIT',$this->pagination_limit));
+                    
+                    // University registration filter
+                    if (!empty($request->university_reg)) {
+                        $query->where('university_reg', 'like', '%' . $request->university_reg . '%');
+                    }
+                    
+                    // First name filter
+                    if (!empty($request->first_name)) {
+                        $query->where('first_name', 'like', '%' . $request->first_name . '%');
+                    }
+                    
+                    // Middle name filter
+                    if (!empty($request->middle_name)) {
+                        $query->where('middle_name', 'like', '%' . $request->middle_name . '%');
+                    }
+                    
+                    // Last name filter
+                    if (!empty($request->last_name)) {
+                        $query->where('last_name', 'like', '%' . $request->last_name . '%');
+                    }
+                    
+                    // Gender filter
+                    if (!empty($request->gender)) {
+                        $query->where('gender', 'like', '%' . $request->gender . '%');
+                    }
+                    
+                    // Blood group filter
+                    if (!empty($request->blood_group)) {
+                        $query->where('blood_group', 'like', '%' . $request->blood_group . '%');
+                    }
+                    
+                    // Nationality filter
+                    if (!empty($request->nationality)) {
+                        $query->where('nationality', 'like', '%' . $request->nationality . '%');
+                    }
+                    
+                    // National ID filters
+                    // if (!empty($request->national_id_1) && $request->national_id_1 != "undefined") {
+                    //     $query->where('national_id_1', 'like', '%' . $request->national_id_1 . '%');
+                    // }
+                    // if (!empty($request->national_id_2) && $request->national_id_2 != "undefined") {
+                    //     $query->where('national_id_2', 'like', '%' . $request->national_id_2 . '%');
+                    // }
+                    // if (!empty($request->national_id_3) && $request->national_id_3 != "undefined") {
+                    //     $query->where('national_id_3', 'like', '%' . $request->national_id_3 . '%');
+                    // }
+                    // if (!empty($request->national_id_4) && $request->national_id_4 != "undefined") {
+                    //     $query->where('national_id_4', 'like', '%' . $request->national_id_4 . '%');
+                    // }
+                    
+                    // Religion filter
+                    if (!empty($request->religion)) {
+                        $query->where('religion', 'like', '%' . $request->religion . '%');
+                    }
+                    
+                    // Caste filter
+                    if (!empty($request->caste)) {
+                        $query->where('caste', 'like', '%' . $request->caste . '%');
+                    }
+                    
+                    // Mother tongue filter
+                    if (!empty($request->mother_tongue)) {
+                        $query->where('mother_tongue', 'like', '%' . $request->mother_tongue . '%');
+                    }
+                    
+                    // Email filter
+                    if (!empty($request->email)) {
+                        $query->where('email', 'like', '%' . $request->email . '%');
+                    }
+                    
+                    // Mobile filters
+                    if (!empty($request->mobile_1)) {
+                        $query->where('ai.mobile_1', 'like', '%' . $request->mobile_1 . '%');
+                    }
+                    if (!empty($request->mobile_2)) {
+                        $query->where('ai.mobile_2', 'like', '%' . $request->mobile_2 . '%');
+                    }
+                    
+                    // faculty ,semester,batch
+                    if (!empty($request->faculty)) {
+                        $query->where('faculty', 'like', '%' . $request->faculty . '%');
+                    }
+                    if (!empty($request->semester_select)) {
+                        $query->where('semester', 'like', '%' . $request->semester_select . '%');
+                    }
+                    if (!empty($request->batch)) {
+                        $query->where('batch', 'like', '%' . $request->batch . '%');
+                    }
+                    if (!empty($request->status)) {
+                        if($request->status == 'active'){
+                            $query->where('status',1);
+                        }elseif($request->status == 'in-active'){
+                            $query->where('status',0);
+                        }
+                    }
+                }
+            })
+            // ->join('addressinfos as ai', 'ai.students_id', '=', 'students.id')
+            // ->join('faculties as f', 'f.id', '=', 'students.faculty')
+            // ->join('semesters as s', 's.id', '=', 'students.semester')
+            // ->join('student_statuses as ss', 'ss.id', '=', 'students.academic_status')
+            ->paginate(env('PAGINATION_LIMIT', $this->pagination_limit));
+            //  return $data['student'];
         }else{
-            $data['student'] = Student::select('students.id', 'students.reg_no', 'students.faculty', 'students.semester',
-                'students.academic_status', 'students.first_name', 'students.middle_name', 'students.last_name', 'students.status',
-                'f.faculty','s.semester','ss.title as academic_status')
+            $data['student'] = Student::with('SemesterData','AcademicStatusData','facultyData')
                 //->Active()
                 ->where('students.status',1)
-                ->join('faculties as f','f.id','=','students.faculty')
-                ->join('semesters as s','s.id','=','students.semester')
-                ->join('student_statuses as ss','ss.id','=','students.academic_status')
+                // ->join('faculties as f','f.id','=','students.faculty')
+                // ->join('semesters as s','s.id','=','students.semester')
+                // ->join('student_statuses as ss','ss.id','=','students.academic_status')
                 ->limit($this->defaultDataFetch)
                 //->get();
                 ->paginate(env('PAGINATION_LIMIT',$this->pagination_limit));
@@ -1939,11 +2074,97 @@ class StudentController extends CollegeBaseController
         $data = [];
         if($request->all()) {
             $data['student'] = Student::select('id', 'reg_no', 'reg_date', 'first_name', 'middle_name', 'last_name',
-                'faculty', 'semester','academic_status', 'status')
-                ->where(function ($query) use ($request) {
-                    $this->commonStudentFilterCondition($query, $request);
+            'faculty', 'semester','academic_status', 'status')->with('SemesterData','AcademicStatusData','facultyData')->where(function ($query) use ($request) {
+                    if ($request != null) {
+                        // Registration number filter
+                        if (!empty($request->reg_no)) {
+                            $query->where('reg_no', 'like', '%' . $request->reg_no . '%');
+                        }
+                        
+                        // University registration filter
+                        if (!empty($request->university_reg)) {
+                            $query->where('university_reg', 'like', '%' . $request->university_reg . '%');
+                        }
+                        
+                        // First name filter
+                        if (!empty($request->first_name)) {
+                            $query->where('first_name', 'like', '%' . $request->first_name . '%');
+                        }
+                        
+                        // Middle name filter
+                        if (!empty($request->middle_name)) {
+                            $query->where('middle_name', 'like', '%' . $request->middle_name . '%');
+                        }
+                        
+                        // Last name filter
+                        if (!empty($request->last_name)) {
+                            $query->where('last_name', 'like', '%' . $request->last_name . '%');
+                        }
+                        
+                        // Gender filter
+                        if (!empty($request->gender)) {
+                            $query->where('gender', 'like', '%' . $request->gender . '%');
+                        }
+                        
+                        // Blood group filter
+                        if (!empty($request->blood_group)) {
+                            $query->where('blood_group', 'like', '%' . $request->blood_group . '%');
+                        }
+                        
+                        // Nationality filter
+                        if (!empty($request->nationality)) {
+                            $query->where('nationality', 'like', '%' . $request->nationality . '%');
+                        }
+                        
+                        
+                        // Religion filter
+                        if (!empty($request->religion)) {
+                            $query->where('religion', 'like', '%' . $request->religion . '%');
+                        }
+                        
+                        // Caste filter
+                        if (!empty($request->caste)) {
+                            $query->where('caste', 'like', '%' . $request->caste . '%');
+                        }
+                        
+                        // Mother tongue filter
+                        if (!empty($request->mother_tongue)) {
+                            $query->where('mother_tongue', 'like', '%' . $request->mother_tongue . '%');
+                        }
+                        
+                        // Email filter
+                        if (!empty($request->email)) {
+                            $query->where('email', 'like', '%' . $request->email . '%');
+                        }
+                        
+                        // Mobile filters
+                        if (!empty($request->mobile_1)) {
+                            $query->where('ai.mobile_1', 'like', '%' . $request->mobile_1 . '%');
+                        }
+                        if (!empty($request->mobile_2)) {
+                            $query->where('ai.mobile_2', 'like', '%' . $request->mobile_2 . '%');
+                        }
+                        
+                        // faculty ,semester,batch
+                        if (!empty($request->faculty)) {
+                            $query->where('faculty', 'like', '%' . $request->faculty . '%');
+                        }
+                        if (!empty($request->semester_select)) {
+                            $query->where('semester', 'like', '%' . $request->semester_select . '%');
+                        }
+                        if (!empty($request->batch)) {
+                            $query->where('batch', 'like', '%' . $request->batch . '%');
+                        }
+                        if (!empty($request->status)) {
+                            if($request->status == 'active'){
+                                $query->where('status',1);
+                            }elseif($request->status == 'in-active'){
+                                $query->where('status',0);
+                            }
+                        }
+                    }
                 })
-                ->get();
+                ->get();   
         }
 
         $data['faculties'] = $this->activeFaculties();

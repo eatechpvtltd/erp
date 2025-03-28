@@ -73,7 +73,7 @@ class Kernel extends HttpKernel
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
         'user-dashboard' => UserGroupDashboard::class,
-        'page-status' =>  CheckPageStatus::class,
+        'page-status'=>  CheckPageStatus::class,
 
     ];
 }

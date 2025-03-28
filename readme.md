@@ -30,3 +30,11 @@ User: webadmin@edufirm.com
 Password: 123
 
 ## EduFirm School & College Web Portal CMS - CodeCanyon Item for Sale
+
+<!--sidebar-->
+<!--menu side bar in ==> https://srv1098-files.hstgr.io/f7afc3d24e0a2712/files/public_html/erp/resources/views/layouts/includes/menu-side.blade.php-->
+
+
+<!--top sidebar-->
+<!--https://srv1098-files.hstgr.io/5ebe4ce46c3938d8/files/public_html/erp/resources/lang/en/-->
+<!--https://srv1098-files.hstgr.io/fe891b56b14ed47a/files/public_html/erp/resources/views/layouts/includes/menu.blade.php-->

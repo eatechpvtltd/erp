@@ -1,4 +1,5 @@
 <!-- page specific plugin scripts -->
+
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/dataTables.buttons.min.js') }}"></script>

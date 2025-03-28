@@ -73,9 +73,19 @@ class RouteController extends CollegeBaseController
         return view(parent::loadDataToView($this->view_path.'.index'), compact('data'));
     }
 
-    public function update(EditValidation $request, $id)
+    public function update(Request $request, $id)
     {
-        if (!$row = Route::find($id)) return parent::invalidRequest();
+        try {
+            $request->validate([
+                'title' => 'required|unique:routes,title,',
+                'rent' => 'required'
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $request->session()->flash($this->message_warning, 'Validation failed. Please check your inputs.');
+            return redirect()->back()->withInput();
+        }
+        $row = Route::find(decrypt($id));
+        if (!$row) return parent::invalidRequest();
 
         $request->request->add(['last_updated_by' => auth()->user()->id]);
         $row->update($request->all());

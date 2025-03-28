@@ -38,7 +38,7 @@
 <div class="form-group">
     {!! Form::label('batch', 'Session', ['class' => 'col-sm-1 control-label']) !!}
     <div class="col-sm-2">
-        {!! Form::select('batch', $data['batch'], null, [ 'class'=>'form-control border-form',"required",'readonly']) !!}
+        {!! Form::select('batch', $data['batch'], null, [ 'class'=>'form-control border-form',"required",'readonly']); !!}
         @include('includes.form_fields_validation_message', ['name' => 'batch'])
     </div>
 
@@ -97,7 +97,7 @@
 
     {!! Form::label('gender', __('form_fields.student.fields.gender'), ['class' => 'col-sm-1 control-label']) !!}
     <div class="col-sm-2">
-        {!! Form::select('gender', __('common.gender'), null, ['class'=>'form-control border-form',"required"]) !!}
+        {!! Form::select('gender', __('common.gender'), null, ['class'=>'form-control border-form',"required"]); !!}
         @include('includes.form_fields_validation_message', ['name' => 'gender'])
     </div>
 </div>
@@ -106,14 +106,14 @@
     {!! Form::label('caste', __('form_fields.student.fields.caste'), ['class' => 'col-sm-1 control-label']) !!}
     <div class="col-sm-2">
         {!! Form::select('caste', ['' => '','GENERAL' => 'GENERAL','OBC' => 'OBC','SC' => 'SC','ST' => 'ST','EWS' => 'EWS', ], null,
-        [ 'class'=>'form-control border-form',"required"]) !!}
+        [ 'class'=>'form-control border-form',"required"]); !!}
         @include('includes.form_fields_validation_message', ['name' => 'caste'])
     </div>
 
     {!! Form::label('religion', 'Nationality/Religion', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-2">
         {!! Form::select('religion', ['' => '','Indian/Hindu' => 'Indian/Hindu','Indian/Sikh' => 'Indian/Sikh','Indian/Muslim' => 'Indian/Muslim','Indian/Christian' => 'Indian/Christian','Indian/Others' => 'Indian/Others', ], null,
-        [ 'class'=>'form-control border-form',"required"]) !!}
+        [ 'class'=>'form-control border-form',"required"]); !!}
         @include('includes.form_fields_validation_message', ['name' => 'religion'])
     </div>
 
@@ -134,14 +134,14 @@
     {!! Form::label('special_category', 'Special Category', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-3">
         {!! Form::select('special_category', ['' => '','Handicapped' => 'Handicapped','Freedom Fighter Dependent' => 'Freedom Fighter Dependent','Defence Ward/Police Ward/Ex-Defence Person' => 'Defence Ward/Police Ward/Ex-Defence Person','OTHERS' => 'OTHERS','NONE' => 'NONE', ], null,
-        [ 'class'=>'form-control border-form',"required"]) !!}
+        [ 'class'=>'form-control border-form',"required"]); !!}
         @include('includes.form_fields_validation_message', ['name' => 'special_category'])
     </div>
 
     {!! Form::label('weightage_claim', 'Weightage Claimed', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-1">
         {!! Form::select('weightage_claim', ['' => '','NCC' => 'NCC','NSS' => 'NSS','SCOUT' => 'SCOUT','GAMES' => 'GAMES','STAFFWARD' => 'STAFFWARD','AWARD' => 'AWARD','OTHERS' => 'OTHERS','NONE' => 'NONE', ], null,
-        [ 'class'=>'form-control border-form',"required"]) !!}
+        [ 'class'=>'form-control border-form',"required"]); !!}
         @include('includes.form_fields_validation_message', ['name' => 'weightage_claim'])
     </div>
 </div>

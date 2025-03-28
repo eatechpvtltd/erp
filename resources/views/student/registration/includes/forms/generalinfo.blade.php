@@ -248,7 +248,7 @@
     <div class="form-group">
         {!! Form::label('first_name', __('form_fields.student.fields.name_of_student'), ['class' => 'col-sm-3 control-label',]) !!}
         <div class="col-sm-3">
-            {!! Form::text('first_name', null, ["class" => "form-control border-form upper","required"]) !!}
+            {!! Form::text('first_name', null, ["class" => "form-control border-form upper", "required"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'first_name'])
         </div>
         <div class="col-sm-3">
@@ -256,7 +256,7 @@
             @include('includes.form_fields_validation_message', ['name' => 'middle_name'])
         </div>
         <div class="col-sm-3">
-            {!! Form::text('last_name', null, ["class" => "form-control border-form upper"]) !!}
+            {!! Form::text('last_name', null, ["class" => "form-control border-form upper", "required"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'last_name'])
         </div>
     </div>
@@ -270,14 +270,14 @@
 
         {!! Form::label('gender', __('form_fields.student.fields.gender'), ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-2">
-            {!! Form::select('gender', __('common.gender'), null, ['class'=>'form-control border-form',"required"]) !!}
+            {!! Form::select('gender', __('common.gender'), null, ['class'=>'form-control border-form',"required"]); !!}
             @include('includes.form_fields_validation_message', ['name' => 'gender'])
         </div>
 
         {!! Form::label('blood_group', __('form_fields.student.fields.blood_group'), ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-2">
             {!! Form::select('blood_group', __('common.blood_group'), null,
-            [ 'class'=>'form-control border-form']) !!}
+            [ 'class'=>'form-control border-form']); !!}
             @include('includes.form_fields_validation_message', ['name' => 'blood_group'])
         </div>
     </div>
@@ -290,31 +290,31 @@
                 @include('includes.form_fields_validation_message', ['name' => 'nationality'])
             </div>
 
-            {!! Form::label('national_id_1', __('form_fields.student.fields.national_id_1'), ['class' => 'col-sm-2 control-label']) !!}
-            <div class="col-sm-2">
-                {!! Form::text('national_id_1', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
-                @include('includes.form_fields_validation_message', ['name' => 'national_id_1'])
-            </div>
+            <!--{!! Form::label('national_id_1', __('form_fields.student.fields.national_id_1'), ['class' => 'col-sm-2 control-label']) !!}-->
+            <!--<div class="col-sm-2">-->
+            <!--    {!! Form::text('national_id_1', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}-->
+            <!--    @include('includes.form_fields_validation_message', ['name' => 'national_id_1'])-->
+            <!--</div>-->
 
-            {!! Form::label('national_id_2', __('form_fields.student.fields.national_id_2'), ['class' => 'col-sm-2 control-label']) !!}
-            <div class="col-sm-2">
-                {!! Form::text('national_id_2', null, ["class" => "form-control border-form upper"]) !!}
-                @include('includes.form_fields_validation_message', ['name' => 'national_id_2'])
-            </div>
+            <!--{!! Form::label('national_id_2', __('form_fields.student.fields.national_id_2'), ['class' => 'col-sm-2 control-label']) !!}-->
+            <!--<div class="col-sm-2">-->
+            <!--    {!! Form::text('national_id_2', null, ["class" => "form-control border-form upper"]) !!}-->
+            <!--    @include('includes.form_fields_validation_message', ['name' => 'national_id_2'])-->
+            <!--</div>-->
     </div>
 
     <div class="form-group">
-        {!! Form::label('national_id_3', __('form_fields.student.fields.national_id_3'), ['class' => 'col-sm-2 control-label']) !!}
-        <div class="col-sm-2">
-            {!! Form::text('national_id_3', null, ["class" => "form-control border-form upper"]) !!}
-            @include('includes.form_fields_validation_message', ['name' => 'national_id_3'])
-        </div>
+        <!--{!! Form::label('national_id_3', __('form_fields.student.fields.national_id_3'), ['class' => 'col-sm-2 control-label']) !!}-->
+        <!--<div class="col-sm-2">-->
+        <!--    {!! Form::text('national_id_3', null, ["class" => "form-control border-form upper"]) !!}-->
+        <!--    @include('includes.form_fields_validation_message', ['name' => 'national_id_3'])-->
+        <!--</div>-->
 
-        {!! Form::label('national_id_4', __('form_fields.student.fields.national_id_4'), ['class' => 'col-sm-2 control-label']) !!}
-        <div class="col-sm-2">
-            {!! Form::text('national_id_4', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
-            @include('includes.form_fields_validation_message', ['name' => 'national_id_4'])
-        </div>
+        <!--{!! Form::label('national_id_4', __('form_fields.student.fields.national_id_4'), ['class' => 'col-sm-2 control-label']) !!}-->
+        <!--<div class="col-sm-2">-->
+        <!--    {!! Form::text('national_id_4', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}-->
+        <!--    @include('includes.form_fields_validation_message', ['name' => 'national_id_4'])-->
+        <!--</div>-->
         {!! Form::label('mother_tongue', __('form_fields.student.fields.mother_tongue'), ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-2">
             {!! Form::text('mother_tongue', null, ["class" => "form-control border-form upper"]) !!}
@@ -339,7 +339,7 @@
     <div class="form-group">
         {!! Form::label('email', __('form_fields.student.fields.email'), ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-3">
-            {!! Form::text('email', null, ["class" => "form-control border-form "]) !!}
+            {!! Form::text('email', null, ["class" => "form-control border-form" ,"required"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'email'])
         </div>
         {!! Form::label('extra_info', __('form_fields.student.fields.extra_info'), ['class' => 'col-sm-2 control-label']) !!}

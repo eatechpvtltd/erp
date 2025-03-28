@@ -21,7 +21,7 @@
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Gateway</th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,12 +44,13 @@
                                     @else
                                         <span class="label label-success text-uppercase">{{ $student->verify_method}} - Verified</span>
                                     @endif
-
-                                    <div class="btn btn-primary btn-minier action-buttons">
+                                    
+                                    <div class="btn btn-primary btn-minier">
                                         <a class="white" href="{{ route('account.fees.online-payment.view', ['id' => encrypt($student->payment_id)]) }}">
                                             <i class="ace-icon fa fa-eye bigger-130" title="View"></i>&nbsp;View
                                         </a>
                                     </div>
+                             
                                 </td>
                             @php($i++)
                         @endforeach

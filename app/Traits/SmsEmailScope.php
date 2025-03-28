@@ -47,6 +47,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Jobs\AllEmail;
 use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Log;
 
 
 trait SmsEmailScope{
@@ -259,15 +260,37 @@ trait SmsEmailScope{
         if($emailSetting->status == "in-active")
             return back()->with($this->message_warning, "Email Setting Not Active. Please Active First.");
 
-        /*sending email*/
-        $emailIds = explode(',',$emailIds);
+            try {
+                   if (!is_string($emailIds) || empty($emailIds)) {
+                    Log::error('Invalid email input format.');
+                    return;
+                }
+            
+                $emailIds = explode(',', $emailIds);
+            
+                // Trim spaces and validate emails
+                $emailIds = array_map('trim', $emailIds);
+                $emailIds = array_filter($emailIds, function ($email) {
+                    return filter_var($email, FILTER_VALIDATE_EMAIL);
+                });
+            
+                if (empty($emailIds)) {
+                    Log::error('No valid email addresses found.');
+                    return;
+                }
+            
+                // Convert array values to ensure proper formatting
+                Mail::to(array_values($emailIds))->send(new EmailAlerts([
+                    'subject' => $subject,
+                    'message' => $message,
+                ]));
+            
+                Log::info('Email sent successfully to: ', $emailIds);
+            
+            } catch (\Exception $e) {
+                Log::error('Error sending email: '. implode(", ", $emailIds). $e->getMessage());
+            }
 
-        /*sending email*/
-
-        Mail::to($emailIds)->send(new EmailAlerts([
-            'subject' => $subject,
-            'message' => $message,
-        ]));
 
         /*Mail Queue*/
        // dispatch(new AllEmail($emailIds, $subject, $message));

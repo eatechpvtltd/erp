@@ -3,6 +3,8 @@
 <!--[if !IE]> -->
 <script src="{{ asset('assets/js/jquery-2.1.4.min.js') }}"></script>
 
+
+
 <!-- <![endif]-->
 
 <!--[if IE]>
@@ -12,6 +14,8 @@
     if('ontouchstart' in document.documentElement) document.write("<script src='{{ asset('assets/js/jquery.mobile.custom.min.js') }}'>"+"<"+"/script>");
 </script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+
 
 <!-- page specific plugin scripts -->
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>

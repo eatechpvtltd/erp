@@ -396,6 +396,7 @@ class FeesCollectionController extends CollegeBaseController
 
     public function dueStore(Request $request)
     {
+        // return $request->all();
         if($request->receive_amount == 0 && $request->fine_amount == 0 && $request->discount_amount == 0){
             $request->session()->flash($this->message_warning, 'Please Enter Receive/Fine/Discount Amount Greater than 0.');
             return back();
@@ -551,7 +552,7 @@ class FeesCollectionController extends CollegeBaseController
             }
 
         });
-
+        
         if($request->print_receipt == "detail"){
             return redirect()->route('print-out.fees.date-receipt-detail', ['id' => $request->students_id, 'date' => $request->date]);
         }
@@ -630,7 +631,6 @@ class FeesCollectionController extends CollegeBaseController
                 $contactNumbers = $this->contactFilter($contactNumbers);
                 $smssuccess = $this->sendSMS($contactNumbers,$message);
             }
-
             /*Now Send Email With Subject*/
             if($alert->email == 1){
                 $emailIds = $this->emailFilter($emailIds);

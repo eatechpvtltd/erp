@@ -67,10 +67,10 @@ class LoginController extends Controller
     }
 
 
-    protected function authenticated(Request $request, $user)
-    {
-        Auth::logoutOtherDevices($request->password);
-    }
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     Auth::logoutOtherDevices($request->password);
+    // }
 
 
 }

@@ -71,10 +71,19 @@ class VehicleController extends CollegeBaseController
         return view(parent::loadDataToView($this->view_path.'.index'), compact('data'));
     }
 
-    public function update(EditValidation $request, $id)
+    public function update(Request $request, $id)
     {
-
-        if (!$row = Vehicle::find($id)) return parent::invalidRequest();
+        try {
+            $request->validate([
+                'number' => 'required | unique:vehicles,number,'.decrypt($id),
+                'type' => 'required',
+                'model' => 'required'
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $request->session()->flash($this->message_warning, 'Validation failed. Please check your inputs.');
+            return redirect()->back()->withInput();
+        }
+        if (!$row = Vehicle::find(decrypt($id))) return parent::invalidRequest();
 
         $request->request->add(['last_updated_by' => auth()->user()->id]);
 

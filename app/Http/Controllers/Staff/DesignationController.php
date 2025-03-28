@@ -58,10 +58,18 @@ class DesignationController extends CollegeBaseController
         return view(parent::loadDataToView($this->view_path.'.index'), compact('data'));
     }
 
-    public function update(EditValidation $request, $id)
+    public function update(Request $request, $id)
     {
+        try {
+            $request->validate([
+                'title'  => 'required | unique:staff_designations,title,'.decrypt($id),
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $request->session()->flash($this->message_warning, 'Validation failed. Please check your inputs.');
+            return redirect()->back()->withInput();
+        }
         $id = decrypt($id);
-       if (!$row = StaffDesignation::find($id)) return parent::invalidRequest();
+        if (!$row = StaffDesignation::find($id)) return parent::invalidRequest();
 
         $request->request->add(['last_updated_by' => auth()->user()->id]);
 
@@ -70,6 +78,7 @@ class DesignationController extends CollegeBaseController
         $request->session()->flash($this->message_success, $this->panel.' Updated Successfully.');
         return redirect()->route($this->base_route);
     }
+
 
     public function delete(Request $request, $id)
     {

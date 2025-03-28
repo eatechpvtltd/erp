@@ -1,25 +1,25 @@
 <fieldset>
-    @if(Config::get('edufirmconfig.student.registration.tabs.general_info.grand_father') == 1)
-        <legend>{{ __('form_fields.student.section_label.parent_info')}}</legend>
+    <!--@if(Config::get('edufirmconfig.student.registration.tabs.general_info.grand_father') == 1)-->
+    <!--    <legend>{{ __('form_fields.student.section_label.parent_info')}}</legend>-->
 
-        <div class="label label-warning arrowed-in arrowed-right arrowed">{{ __('form_fields.student.section_label.grand_father')}}</div>
-        <hr class="hr-8">
-        <div class="form-group">
-            {!! Form::label('grandfather_name', __('form_fields.student.fields.grandfather_name'), ['class' => 'col-sm-3 control-label']) !!}
-            <div class="col-sm-3">
-                {!! Form::text('grandfather_first_name', null, [ "class" => "form-control border-form upper"]) !!}
-                @include('includes.form_fields_validation_message', ['name' => 'grandfather_first_name'])
-            </div>
-            <div class="col-sm-3">
-                {!! Form::text('grandfather_middle_name', null, ["class" => "form-control border-form upper"]) !!}
-                @include('includes.form_fields_validation_message', ['name' => 'grandfather_middle_name'])
-            </div>
-            <div class="col-sm-3">
-                {!! Form::text('grandfather_last_name', null, [ "class" => "form-control border-form upper"]) !!}
-                @include('includes.form_fields_validation_message', ['name' => 'grandfather_last_name'])
-            </div>
-        </div>
-    @endif
+    <!--    <div class="label label-warning arrowed-in arrowed-right arrowed">{{ __('form_fields.student.section_label.grand_father')}}</div>-->
+    <!--    <hr class="hr-8">-->
+    <!--    <div class="form-group">-->
+    <!--        {!! Form::label('grandfather_name', __('form_fields.student.fields.grandfather_name'), ['class' => 'col-sm-3 control-label']) !!}-->
+    <!--        <div class="col-sm-3">-->
+    <!--            {!! Form::text('grandfather_first_name', null, [ "class" => "form-control border-form upper"]) !!}-->
+    <!--            @include('includes.form_fields_validation_message', ['name' => 'grandfather_first_name'])-->
+    <!--        </div>-->
+    <!--        <div class="col-sm-3">-->
+    <!--            {!! Form::text('grandfather_middle_name', null, ["class" => "form-control border-form upper"]) !!}-->
+    <!--            @include('includes.form_fields_validation_message', ['name' => 'grandfather_middle_name'])-->
+    <!--        </div>-->
+    <!--        <div class="col-sm-3">-->
+    <!--            {!! Form::text('grandfather_last_name', null, [ "class" => "form-control border-form upper"]) !!}-->
+    <!--            @include('includes.form_fields_validation_message', ['name' => 'grandfather_last_name'])-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--@endif-->
     @if(Config::get('edufirmconfig.student.registration.tabs.general_info.father') == 1)
         <div class="label label-warning arrowed-in arrowed-right arrowed">{{ __('form_fields.student.section_label.father')}}</div>
         <hr class="hr-8">
@@ -35,7 +35,7 @@
                 @include('includes.form_fields_validation_message', ['name' => 'father_first_name'])
             </div>
             <div class="col-sm-3">
-                {!! Form::text('father_last_name', null, [ "class" => "form-control border-form upper"]) !!}
+                {!! Form::text('father_last_name', null, [ "class" => "form-control border-form upper","required"]) !!}
                 @include('includes.form_fields_validation_message', ['name' => 'father_last_name'])
             </div>
         </div>
@@ -111,7 +111,7 @@
                 @include('includes.form_fields_validation_message', ['name' => 'mother_first_name'])
             </div>
             <div class="col-sm-3">
-                {!! Form::text('mother_last_name', null, [ "class" => "form-control border-form upper"]) !!}
+                {!! Form::text('mother_last_name', null, [ "class" => "form-control border-form upper","required"]) !!}
                 @include('includes.form_fields_validation_message', ['name' => 'mother_last_name'])
             </div>
         </div>

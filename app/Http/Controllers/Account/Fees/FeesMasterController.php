@@ -99,7 +99,7 @@ class FeesMasterController extends CollegeBaseController
     public function add(Request $request)
     {
         $data = [];
-        if($request->all()) {
+        // if($request->all()) {
             if ($request->has('facility')) {
                 /*with library facility*/
                 if ($request->get('facility') == 1) {
@@ -145,7 +145,7 @@ class FeesMasterController extends CollegeBaseController
                     })
                     ->get();
             }
-        }
+        // }
 
         $data['faculties'] = $this->activeFaculties();
         $data['batch'] = $this->activeBatch();

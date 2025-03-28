@@ -3,7 +3,7 @@
 <div class="form-group">
     {!! Form::label('batch', 'Session', ['class' => 'col-sm-1 control-label']) !!}
     <div class="col-sm-2">
-        {!! Form::select('batch', $data['batch'], null, [ 'class'=>'form-control border-form',"required",'readonly']) !!}
+        {!! Form::select('batch', $data['batch'], null, [ 'class'=>'form-control border-form',"required",'readonly']); !!}
         @include('includes.form_fields_validation_message', ['name' => 'batch'])
     </div>
 
@@ -56,14 +56,14 @@
 
             {!! Form::label('gender', __('form_fields.student.fields.gender'), ['class' => 'col-sm-2 control-label']) !!}
             <div class="col-sm-2">
-                {!! Form::select('gender', __('common.gender'), null, ['class'=>'form-control border-form',"required"]) !!}
+                {!! Form::select('gender', __('common.gender'), null, ['class'=>'form-control border-form',"required"]); !!}
                 @include('includes.form_fields_validation_message', ['name' => 'gender'])
             </div>
 
             {!! Form::label('blood_group', __('form_fields.student.fields.blood_group'), ['class' => 'col-sm-2 control-label']) !!}
             <div class="col-sm-2">
                 {!! Form::select('blood_group', __('common.blood_group'), null,
-                [ 'class'=>'form-control border-form']) !!}
+                [ 'class'=>'form-control border-form']); !!}
                 @include('includes.form_fields_validation_message', ['name' => 'blood_group'])
             </div>
         </div>

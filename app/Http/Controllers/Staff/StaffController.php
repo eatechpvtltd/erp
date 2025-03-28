@@ -318,6 +318,7 @@ class StaffController extends CollegeBaseController
 
     }
 
+
     public function delete(Request $request, $id)
     {
         $id = decrypt($id);

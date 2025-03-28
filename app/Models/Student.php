@@ -15,6 +15,19 @@ class Student extends BaseModel
         'admission_payment_ref_no','admission_course_fee','national_id_1','national_id_2', 'special_category','weightage_claim',
         ];
 
+    public function SemesterData()
+    {
+        return $this->belongsTo(Semester::class,'semester','id');
+    }
+    public function AcademicStatusData()
+    {
+        return $this->belongsTo(StudentStatus::class,'academic_status','id');
+    }
+    public function facultyData()
+    {
+        return $this->belongsTo(Faculty::class,'faculty','id');
+    }
+
     public function address()
     {
         return $this->hasOne(Addressinfo::class,'students_id', 'id');

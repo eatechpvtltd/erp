@@ -71,7 +71,6 @@ class OnlinePaymentController extends CollegeBaseController
     //Online Payment & Verification
     public function onlinePayment(Request $request)
     {
-
         $data = [];
         if($request->all()){
             $students = Student::select('students.id','students.reg_no','students.first_name',
@@ -104,16 +103,16 @@ class OnlinePaymentController extends CollegeBaseController
                     }
 
                 })
-                ->join('online_payments as op', 'op.students_id', '=', 'students.id')
+                ->leftJoin('online_payments as op', 'op.students_id', '=', 'students.id')
                 ->get();
         }else{
-            $students = Student::select('students.id','students.reg_no','students.first_name',
-                'students.middle_name', 'students.last_name','students.faculty','students.semester',
-                'op.id as payment_id','op.date', 'op.amount', 'op.payment_gateway', 'op.ref_no', 'op.ref_text','op.verify_method',
-                'op.status as payment_status','op.created_by as paid_by')
-                //->where('op.status',0)
-                ->join('online_payments as op', 'op.students_id', '=', 'students.id')
-                ->get();
+            $students = Student::select('students.id', 'students.reg_no', 'students.first_name',
+                            'students.middle_name', 'students.last_name', 'students.faculty', 
+                            'students.semester', 'op.id as payment_id', 'op.date', 'op.amount', 
+                            'op.payment_gateway', 'op.ref_no', 'op.ref_text', 'op.verify_method', 
+                            'op.status as payment_status', 'op.created_by as paid_by')
+                   ->leftJoin('online_payments as op', 'op.students_id', '=', 'students.id')
+                   ->get();
         }
 
 

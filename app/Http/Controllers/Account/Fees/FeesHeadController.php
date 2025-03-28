@@ -83,11 +83,10 @@ class FeesHeadController extends CollegeBaseController
 
     public function bulkAction(Request $request)
     {
-        if ($request->has('bulk_action') && in_array($request->get('bulk_action'), ['active', 'in-active', 'delete'])) {
-
+        if ($request->has('bulk_action') && $request->get('bulk_action')) {
             if ($request->has('chkIds')) {
                 foreach ($request->get('chkIds') as $row_id) {
-                    $row_id = decrypt($row_id);
+                    $row_id = $row_id;
                     switch ($request->get('bulk_action')) {
                         case 'active':
                         case 'in-active':

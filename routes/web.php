@@ -692,6 +692,7 @@ Route::group(['prefix' => 'attendance/',                                'as' => 
 
     Route::get('report/student',                 ['as' => '.report.student',                'middleware' => ['ability:super-admin,student-attendance-report'],    'uses' => 'AttendanceReportController@student']);
     Route::get('report/staff',                   ['as' => '.report.staff',                    'middleware' => ['ability:super-admin,staff-attendance-report'],          'uses' => 'AttendanceReportController@staff']);
+    Route::get('reported/staff',                   ['as' => '.reported.staff',                    'middleware' => ['ability:super-admin,staff-attendance-report'],          'uses' => 'AttendanceReportController@staff']);
 
 });
 

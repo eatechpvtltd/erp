@@ -371,7 +371,10 @@ class FeesPrintController extends CollegeBaseController
 
     public function dateReceiptAmount(Request $request,$id, $date)
     {
-        $id = decrypt($id);
+        // check if int 
+        // return $id;
+        
+        $id = $id;
         $data['student'] = Student::select('id','reg_no', 'first_name','middle_name','last_name',
             'faculty','semester')
             ->find($id);
@@ -394,7 +397,7 @@ class FeesPrintController extends CollegeBaseController
 
     public function dateReceiptDetail(Request $request, $id, $date)
     {
-        $id = decrypt($id);
+        $id = $id;
         $data['student'] = Student::select('id','reg_no', 'first_name','middle_name','last_name',
             'faculty','semester')
             ->find($id);
